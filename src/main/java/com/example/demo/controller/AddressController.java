@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.dto.request.AddressCreationDTO;
 import com.example.demo.dto.response.AddressResponseDTO;
 import com.example.demo.service.AddressService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -20,6 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/addr")
 @RequiredArgsConstructor
+@Tag(name="address",description ="address related APIs" )
 public class AddressController {
     private final AddressService addressService;
     private final ServerProperties serverProperties;
@@ -40,6 +43,12 @@ public class AddressController {
     }
 
     @PutMapping("/update")
+    @Operation(
+            summary="update address",
+            description="this api assists in updating address",
+            tags={"address","description"}
+
+    )
     public ResponseEntity<AddressResponseDTO> update(@RequestParam Integer id,
                                                      @RequestBody AddressCreationDTO
                                                          request) {
